@@ -4,15 +4,18 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import dev.byto.hcsgus.data.local.dao.RemoteKeysDao
 import dev.byto.hcsgus.data.local.dao.UserDao
+import dev.byto.hcsgus.data.local.dao.UserDetailDao
 import dev.byto.hcsgus.data.local.entity.RemoteKeysEntity
+import dev.byto.hcsgus.data.local.entity.UserDetailEntity
 import dev.byto.hcsgus.data.local.entity.UserEntity
 
 @Database(
-    entities = [UserEntity::class, RemoteKeysEntity::class],
+    entities = [UserEntity::class, UserDetailEntity::class, RemoteKeysEntity::class],
     version = 1,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
+    abstract fun userDetailDao(): UserDetailDao
     abstract fun remoteKeysDao(): RemoteKeysDao
 }

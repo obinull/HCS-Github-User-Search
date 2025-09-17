@@ -1,5 +1,6 @@
 package dev.byto.hcsgus.data.mapper
 
+import dev.byto.hcsgus.data.local.entity.UserDetailEntity
 import dev.byto.hcsgus.data.local.entity.UserEntity
 import dev.byto.hcsgus.data.remote.dto.UserDetailDto
 import dev.byto.hcsgus.data.remote.dto.UserDto
@@ -12,26 +13,21 @@ fun UserDto.toEntity(): UserEntity {
         id = this.id,
         login = this.login,
         avatarUrl = this.avatarUrl,
-        bio = null,
-        followers = null,
-        following = null,
-        createdAt = null,
-        publicRepos = null,
-        blog = null,
-        subscriptionsUrl = this.subscriptionsUrl,
-        updatedAt = null,
-        siteAdmin = this.siteAdmin,
-        company = null,
-        followingUrl = this.followingUrl,
-        followersUrl = this.followersUrl,
+        gistsUrl = this.gistsUrl,
         reposUrl = this.reposUrl,
+        followingUrl = this.followingUrl,
+        starredUrl = this.starredUrl,
+        followersUrl = this.followersUrl,
+        type = this.type,
+        url = this.url,
+        subscriptionsUrl = this.subscriptionsUrl,
+        receivedEventsUrl = this.receivedEventsUrl,
+        eventsUrl = this.eventsUrl,
+        htmlUrl = this.htmlUrl,
+        siteAdmin = this.siteAdmin,
         gravatarId = this.gravatarId,
-        email = null,
-        organizationsUrl = this.organizationsUrl,
-        name = null,
-        location = null,
-        publicGists = null,
-        url = this.url
+        nodeId = this.nodeId,
+        organizationsUrl = this.organizationsUrl
     )
 }
 
@@ -43,7 +39,44 @@ fun UserEntity.toDomainModel(): User {
     )
 }
 
-fun UserDetailDto.toDomainModel(): UserDetail {
+fun UserDetailDto.toEntity(): UserDetailEntity {
+    return UserDetailEntity(
+        id = this.id,
+        login = this.login,
+        avatarUrl = this.avatarUrl,
+        gistsUrl = this.gistsUrl,
+        reposUrl = this.reposUrl,
+        followingUrl = this.followingUrl,
+        twitterUsername = this.twitterUsername,
+        bio = this.bio,
+        createdAt = this.createdAt,
+        type = this.type,
+        blog = this.blog,
+        subscriptionsUrl = this.subscriptionsUrl,
+        updatedAt = this.updatedAt,
+        siteAdmin = this.siteAdmin,
+        company = this.company,
+        publicRepos = this.publicRepos,
+        gravatarId = this.gravatarId,
+        email = this.email,
+        organizationsUrl = this.organizationsUrl,
+        hireable = this.hireable,
+        starredUrl = this.starredUrl,
+        followersUrl = this.followersUrl,
+        publicGists = this.publicGists,
+        url = this.url,
+        receivedEventsUrl = this.receivedEventsUrl,
+        followers = this.followers,
+        eventsUrl = this.eventsUrl,
+        htmlUrl = this.htmlUrl,
+        following = this.following,
+        name = this.name,
+        location = this.location,
+        nodeId = this.nodeId
+    )
+}
+
+fun UserDetailEntity.toDomainModel(): UserDetail {
     return UserDetail(
         id = this.id.orZero(),
         login = this.login.orEmpty(),

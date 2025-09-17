@@ -1,5 +1,6 @@
 package dev.byto.hcsgus.data.repository
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -7,6 +8,7 @@ import androidx.paging.PagingData
 import androidx.paging.map
 import dev.byto.hcsgus.data.local.AppDatabase
 import dev.byto.hcsgus.data.mapper.toDomainModel
+import dev.byto.hcsgus.data.mapper.toEntity // Make sure this import is correct for UserDetail -> UserDetailEntity
 import dev.byto.hcsgus.data.paging.UserRemoteMediator
 import dev.byto.hcsgus.data.paging.UserSearchPagingSource
 import dev.byto.hcsgus.data.remote.api.ApiService
@@ -25,6 +27,8 @@ class UserRepositoryImpl @Inject constructor(
     private val apiService: ApiService,
     private val database: AppDatabase
 ) : UserRepository {
+
+    private val tag = "UserRepositoryImpl"
 
     /**
      * Implements the offline-first user list.
@@ -51,10 +55,28 @@ class UserRepositoryImpl @Inject constructor(
 
     override suspend fun getUserDetail(username: String): Flow<Result<UserDetail>> {
         return flow {
-            val userDetail = apiService.getUserDetail(username).toDomainModel()
-            emit(Result.success(userDetail))
-        }.catch {
-            emit(Result.failure(it))
+            // Fetch from network
+            val userDetailResponse = apiService.getUserDetail(username).toEntity()
+            val userDetailDomain = userDetailResponse.toDomainModel()
+
+            // Save to local database
+            try {
+                // Assuming UserDetailDomain has a .toEntity() extension function
+                // that maps it to your Room UserDetailEntity
+                database.userDetailDao().insertUserDetail(userDetailResponse)
+            } catch (e: Exception) {
+                // Log the error or handle it as needed.
+                // The flow will still proceed to emit the network response.
+                Log.e(tag, "Failed to save user detail to database", e)
+                // Optionally, you could rethrow or emit a different kind of error/state
+                // if database saving is critical for this operation to be considered a success.
+            }
+
+            emit(Result.success(userDetailDomain))
+        }.catch { e ->
+            // This catches errors from apiService.getUserDetail() or other upstream issues
+            Log.e(tag, "Failed to fetch user detail from network", e)
+            emit(Result.failure(e))
         }
     }
 }
