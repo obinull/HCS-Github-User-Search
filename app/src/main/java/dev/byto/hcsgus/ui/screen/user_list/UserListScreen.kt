@@ -1,5 +1,6 @@
 package dev.byto.hcsgus.ui.screen.user_list
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -15,7 +17,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -28,6 +29,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -37,6 +39,7 @@ import androidx.paging.compose.itemKey
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.integration.compose.placeholder
+import com.valentinilk.shimmer.shimmer
 import dev.byto.hcsgus.R
 import dev.byto.hcsgus.domain.model.User
 import dev.byto.hcsgus.ui.theme.quicksandFamily
@@ -85,18 +88,21 @@ fun UserListScreen(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                items(count = users.itemCount, key = users.itemKey { it.id }) { index ->
-                    val user = users[index]
-                    if (user != null) {
-                        UserListItem(user = user, onClick = { onNavigateToDetail(user.login) })
+                if (users.loadState.refresh is LoadState.Loading) {
+                    items(10) {
+                        ShimmeringUserListItem()
+                    }
+                } else {
+                    items(count = users.itemCount, key = users.itemKey { it.id }) { index ->
+                        val user = users[index]
+                        if (user != null) {
+                            UserListItem(user = user, onClick = { onNavigateToDetail(user.login) })
+                        }
                     }
                 }
-                if (users.loadState.refresh is LoadState.Loading) {
+                if (users.loadState.append is LoadState.Loading) {
                     item {
-                        Box(
-                            modifier = Modifier.fillParentMaxSize(),
-                            contentAlignment = Alignment.Center
-                        ) { CircularProgressIndicator() }
+                       ShimmeringUserListItem()
                     }
                 }
             }
@@ -131,6 +137,38 @@ fun UserListItem(user: User, onClick: () -> Unit) {
             Text(
                 text = user.login, style = MaterialTheme.typography.titleMedium,
                 fontFamily = quicksandFamily
+            )
+        }
+    }
+}
+
+@Composable
+fun ShimmeringUserListItem() {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 4.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        shape = RoundedCornerShape(size = 20.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(12.dp)
+                .shimmer(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(56.dp)
+                    .clip(RoundedCornerShape(size = 20.dp))
+                    .background(Color.LightGray)
+            )
+            Spacer(modifier = Modifier.width(16.dp))
+            Box(
+                modifier = Modifier
+                    .height(20.dp)
+                    .fillMaxWidth(0.7f)
+                    .background(Color.LightGray)
             )
         }
     }

@@ -1,7 +1,3 @@
-Of course, here is the improved README version, fully in English, made clearer and including image placeholders to make it more visual and easier to understand.
-
------
-
 # HCS GitHub User Search
 
 <div align="center">
