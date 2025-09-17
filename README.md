@@ -4,16 +4,20 @@ Of course, here is the improved README version, fully in English, made clearer a
 
 # HCS GitHub User Search
 
-\<p align="center"\>
-A simple, modern Android application to search for GitHub users and view their details, built with Clean Architecture, MVVM, and Jetpack Compose.
-\</p\>
+<div align="center">
 
-\<p align="center"\>
-\<img src="[https://img.shields.io/badge/Kotlin-1.9.20-7F52FF?logo=kotlin](https://www.google.com/search?q=https://img.shields.io/badge/Kotlin-1.9.20-7F52FF%3Flogo%3Dkotlin)" alt="Kotlin"\>
-\<img src="[https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?logo=jetpackcompose](https://www.google.com/search?q=https://img.shields.io/badge/UI-Jetpack%2520Compose-4285F4%3Flogo%3Djetpackcompose)" alt="Jetpack Compose"\>
-\<img src="[https://img.shields.io/badge/Architecture-MVVM%20+%20Clean-00A599](https://www.google.com/search?q=https://img.shields.io/badge/Architecture-MVVM%2520%2B%2520Clean-00A599)" alt="Architecture"\>
-\<img src="[https://img.shields.io/badge/License-MIT-blue.svg](https://www.google.com/search?q=https://img.shields.io/badge/License-MIT-blue.svg)" alt="License"\>
-\</p\>
+# 📱 GitHub User Search
+
+A simple, modern Android application to search for GitHub users and view their details, built with **Clean Architecture**, **MVVM**, and **Jetpack Compose**.
+
+---
+
+![Kotlin](https://img.shields.io/badge/Kotlin-1.9.20-7F52FF?logo=kotlin)  
+![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?logo=jetpackcompose)  
+![Architecture](https://img.shields.io/badge/Architecture-MVVM%20+%20Clean-00A599)  
+![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
+
+</div>
 
 ## App Preview
 
