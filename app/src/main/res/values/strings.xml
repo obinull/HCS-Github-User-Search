@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">HCS Github User Search</string>
+    <string name="retry">Retry</string>
+    <string name="title_github_users">GitHub Users</string>
+    <string name="title_search_users">Search Users</string>
+    <string name="title_user_details">User Details</string>
+    <string name="title_user_list">User List</string>
+    <string name="title_user_search">GitHub User Search</string>
+    <string name="username_placeholder">Enter username…</string>
+    <string name="username_search">Search</string>
+    <string name="close_search">Close Search</string>
+    <string name="error_no_users_found">No users found</string>
+    <string name="message_error_reach_limit">You have reach limit to request Github API, please try again in one hour</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
+    <string name="repositories">Repositories</string>
+    <string name="user_avatar">User Avatar</string>
+    <string name="back">Back</string>
+</resources>
