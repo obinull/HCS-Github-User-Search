@@ -8,6 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.byto.hcsgus.domain.model.User
 import dev.byto.hcsgus.domain.usecase.GetUsersUseCase
 import dev.byto.hcsgus.domain.usecase.SearchUsersUseCase
+import dev.byto.hcsgus.util.constant.Constants
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
@@ -52,12 +53,6 @@ class UserListViewModel @Inject constructor(
      * @param query The new search text from the user.
      */
     fun search(query: String) {
-        // We only trigger a new search if the query is different from the current one.
-        if (_searchQuery.value == query) return
-
-        // Basic validation: search for queries with 3+ characters or when clearing the search.
-        if (query.length > 2 || query.isBlank()) {
-            _searchQuery.value = query
-        }
+        _searchQuery.value = query
     }
 }
