@@ -7,4 +7,7 @@ object Constants {
     const val AUTH_TOKEN: String = "Bearer $TOKEN"
     const val GITHUB_VERSION: String = "2022-11-28"
     const val SERVER_URL: String = "https://api.github.com/"
+
+    const val USERNAME_KEY = "username"
+    const val ERROR_MESSAGE_KEY = "Username argument is missing"
 }

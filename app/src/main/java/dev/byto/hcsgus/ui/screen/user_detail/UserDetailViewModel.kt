@@ -4,10 +4,11 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.byto.hcsgus.core.base.BaseViewModel
-import dev.byto.hcsgus.domain.model.UserDetail
 import dev.byto.hcsgus.domain.model.UserDetailState
 import dev.byto.hcsgus.domain.usecase.GetUserDetailUseCase
 import dev.byto.hcsgus.util.GlobalErrorHandler
+import dev.byto.hcsgus.util.constant.Constants.ERROR_MESSAGE_KEY
+import dev.byto.hcsgus.util.constant.Constants.USERNAME_KEY
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -24,11 +25,6 @@ class UserDetailViewModel @Inject constructor(
 
     // Initial state of the ViewModel
     override fun createInitialState(): UserDetailState = UserDetailState()
-
-    companion object {
-        const val USERNAME_KEY = "username"
-        const val ERROR_MESSAGE_KEY = "Username argument is missing"
-    }
 
     init {
         // Retrieve the username passed via navigation
