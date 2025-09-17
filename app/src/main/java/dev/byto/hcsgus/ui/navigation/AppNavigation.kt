@@ -1,9 +1,8 @@
 package dev.byto.hcsgus.ui.navigation
 
-
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -14,8 +13,7 @@ import dev.byto.hcsgus.ui.screen.user_detail.UserDetailScreen
 import dev.byto.hcsgus.ui.screen.user_list.UserListScreen
 
 @Composable
-fun AppNavigation() {
-    val navController = rememberNavController()
+fun AppNavigation(navController: NavHostController = rememberNavController()) {
 
     NavHost(
         navController = navController,
